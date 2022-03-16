@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'routes.dart';
 import 'screens/splash/splashScreen.dart';
 
-void main() {
+void main() async {
+
   runApp(BearVoca());
 }
 
