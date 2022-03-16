@@ -1,7 +1,7 @@
 import 'package:bearvoca/theme.dart';
 import 'package:flutter/material.dart';
 import 'routes.dart';
-import 'screens/splash/splash_screen.dart';
+import 'screens/splash/splashScreen.dart';
 
 void main() async {
 

@@ -1,10 +1,10 @@
-import 'package:bearvoca/screens/achievementRate/achievement_rate.dart';
-import 'package:bearvoca/screens/myWord/my_word.dart';
+import 'package:bearvoca/screens/achievement-rate/achievementRate.dart';
+import 'package:bearvoca/screens/my-word/myWord.dart';
 import 'package:bearvoca/screens/reward/reward.dart';
 import 'package:bearvoca/screens/setting/setting.dart';
 import 'package:flutter/material.dart';
-import '../../models/nav_item.dart';
-import 'home/home_screen.dart';
+import '../../models/navItem.dart';
+import 'home/homeScreen.dart';
 
 class MainScreens extends StatefulWidget {
   static String routeName = "/main_screens";
