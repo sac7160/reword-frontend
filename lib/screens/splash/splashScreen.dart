@@ -1,5 +1,5 @@
-import 'package:bearvoca/screens/home/home_screen.dart';
-import 'package:bearvoca/screens/main_screens.dart';
+import 'package:bearvoca/screens/home/homeScreen.dart';
+import 'package:bearvoca/screens/mainScreens.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
