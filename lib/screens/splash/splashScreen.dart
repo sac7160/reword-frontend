@@ -1,5 +1,6 @@
 import 'package:bearvoca/screens/home/homeScreen.dart';
 import 'package:bearvoca/screens/mainScreens.dart';
+import 'package:bearvoca/screens/sign-in/signIn.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -8,7 +9,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration(seconds: 5), () {
-      Navigator.pushReplacementNamed(context, MainScreens.routeName);
+      Navigator.pushReplacementNamed(context, SignInScreen.routeName);
     });
 
     return Scaffold(
