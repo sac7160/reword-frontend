@@ -1,11 +1,57 @@
+import 'package:bearvoca/screens/my-word/components/advanced.dart';
+import 'package:bearvoca/screens/my-word/components/allWord.dart';
+import 'package:bearvoca/screens/my-word/components/middleClass.dart';
+import 'package:bearvoca/screens/my-word/components/novice.dart';
 import 'package:flutter/material.dart';
+
+import 'components/toefl.dart';
+import 'components/toeic.dart';
 
 class MyWordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text("MyWord"),
+    List<String> categories = ["전체보기", "초급", "중급", "고급", "토익", "토플"];
+    return DefaultTabController(
+      initialIndex: 0,
+      length: categories.length,
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text("내 단어장"),
+          bottom: PreferredSize(
+            child: Container(
+              decoration: BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(width: 0.3, color: Colors.black)),
+                  color: Colors.brown),
+              child: TabBar(
+                tabs: List.generate(
+                  categories.length,
+                  (index) => Tab(
+                    text: categories[index],
+                  ),
+                ),
+                labelColor: Colors.black,
+                unselectedLabelColor: Colors.grey,
+                labelStyle: TextStyle(color: Colors.black),
+                indicator: UnderlineTabIndicator(
+                  borderSide: BorderSide(width: 2, color: Colors.brown),
+                ),
+              ),
+            ),
+            preferredSize: Size.fromHeight(42),
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            AllWord(),
+            Novice(),
+            MiddleClass(),
+            Advanced(),
+            Toeic(),
+            Toefl(),
+          ],
+        ),
       ),
     );
   }
