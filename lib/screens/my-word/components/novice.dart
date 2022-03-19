@@ -4,7 +4,7 @@ class Novice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("초급 단어"),
+      child: const Text("초급 단어"),
     );
   }
 }

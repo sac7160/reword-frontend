@@ -12,21 +12,21 @@ class SignInScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 100,
             ),
-            Container(
+            SizedBox(
               height: 330,
               width: MediaQuery.of(context).size.width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text(
+                  const Text(
                     "리워드와 함께 \n 공부도 하고 돈도 받고!",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 60,
                   ),
                   SizedBox(
@@ -37,7 +37,7 @@ class SignInScreen extends StatelessWidget {
                       color: Colors.brown,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   SizedBox(
@@ -49,7 +49,7 @@ class SignInScreen extends StatelessWidget {
                       fontColor: Colors.black,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   SizedBox(
@@ -64,15 +64,15 @@ class SignInScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 40),
-            Container(
+            const SizedBox(height: 40),
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.9,
-              child: Divider(
+              child: const Divider(
                 height: 10,
                 color: Colors.black,
               ),
             ),
-            Text(
+            const Text(
               "이미 계정이 있으신가요?",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 13),
@@ -88,7 +88,7 @@ class SignInScreen extends StatelessWidget {
                 fontColor: Colors.black,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 100,
             )
           ],

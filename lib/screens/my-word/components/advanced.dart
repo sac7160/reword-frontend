@@ -4,7 +4,7 @@ class Advanced extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("고급 단어"),
+      child: const Text("고급 단어"),
     );
   }
 }
