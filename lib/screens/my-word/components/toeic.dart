@@ -4,7 +4,7 @@ class Toeic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("토익 단어"),
+      child: const Text("토익 단어"),
     );
   }
 }

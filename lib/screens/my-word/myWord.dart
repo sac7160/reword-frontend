@@ -17,10 +17,10 @@ class MyWordScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text("내 단어장"),
+          title: const Text("내 단어장"),
           bottom: PreferredSize(
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   border: Border(
                       bottom: BorderSide(width: 0.3, color: Colors.black)),
                   color: Colors.brown),
@@ -33,13 +33,13 @@ class MyWordScreen extends StatelessWidget {
                 ),
                 labelColor: Colors.black,
                 unselectedLabelColor: Colors.grey,
-                labelStyle: TextStyle(color: Colors.black),
-                indicator: UnderlineTabIndicator(
+                labelStyle: const TextStyle(color: Colors.black),
+                indicator: const UnderlineTabIndicator(
                   borderSide: BorderSide(width: 2, color: Colors.brown),
                 ),
               ),
             ),
-            preferredSize: Size.fromHeight(42),
+            preferredSize: const Size.fromHeight(42),
           ),
         ),
         body: TabBarView(
