@@ -26,20 +26,21 @@ class _SignInFormState extends State<SignInForm> {
         child: Column(
           children: [
             _buildIdField(),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             _buildPasswordField(),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             SignInButton(
               text: "로그인",
               press: () {
-                if (_formKey.currentState!.validate() && errors.isEmpty) {
+                // TEST
+                //if (_formKey.currentState!.validate() && errors.isEmpty) {
                   Navigator.pushNamedAndRemoveUntil(
                       context, MainScreens.routeName, (route) => false);
-                }
+                //}
               },
               color: Colors.brown,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             FormError(errors: errors)
           ],
         ),
@@ -74,7 +75,7 @@ class _SignInFormState extends State<SignInForm> {
         focusedBorder: outlineInputBorder(Colors.blue),
         errorBorder: outlineInputBorder(Colors.red),
         disabledBorder: InputBorder.none,
-        contentPadding: EdgeInsets.only(left: 16, top: 15, bottom: 15),
+        contentPadding: const EdgeInsets.only(left: 16, top: 15, bottom: 15),
         filled: true,
         fillColor: Colors.brown,
         hintStyle: TextStyle(color: Colors.grey[400], fontSize: 18),
@@ -107,7 +108,7 @@ class _SignInFormState extends State<SignInForm> {
         focusedBorder: outlineInputBorder(Colors.blue),
         errorBorder: outlineInputBorder(Colors.red),
         disabledBorder: InputBorder.none,
-        contentPadding: EdgeInsets.only(left: 16, top: 15, bottom: 15),
+        contentPadding: const EdgeInsets.only(left: 16, top: 15, bottom: 15),
         filled: true,
         fillColor: Colors.brown,
         hintStyle: TextStyle(color: Colors.grey[400], fontSize: 18),

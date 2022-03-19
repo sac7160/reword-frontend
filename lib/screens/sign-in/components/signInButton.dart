@@ -14,7 +14,7 @@ class SignInButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         primary: color,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
       ),
       onPressed: press,
       child: Center(

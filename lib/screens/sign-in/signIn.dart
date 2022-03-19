@@ -1,6 +1,10 @@
 import 'package:bearvoca/screens/sign-in/components/signInButton.dart';
 import 'package:bearvoca/screens/sign-in/siginInEmail.dart';
+import 'package:bearvoca/util/loginModule.dart';
 import 'package:flutter/material.dart';
+
+import '../../util/appFunc.dart';
+import '../mainScreens.dart';
 
 class SignInScreen extends StatelessWidget {
   static String routeName = "/SignInScreen";
@@ -12,32 +16,59 @@ class SignInScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 100,
             ),
-            Container(
+            SizedBox(
               height: 330,
               width: MediaQuery.of(context).size.width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text(
+                  const Text(
                     "리워드와 함께 \n 공부도 하고 돈도 받고!",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 60,
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width - 20,
                     child: SignInButton(
-                      text: "kakao계정으로 시작",
-                      press: () {},
+                      text: "kakao 계정으로 시작",
+                      press: () async {
+                        LOGIN_RESULT loginResult = await tryKakaoLogin();
+                        switch(loginResult) {
+                          case LOGIN_RESULT.resultOk:
+                            LOGIN_RESULT vocaLoginResult = await tryVocaLogin(
+                                LoginModule.instance.strUserEmail, "",
+                                isSnsLogin: true);
+
+                            if(vocaLoginResult == LOGIN_RESULT.resultOk) {
+                              // login was successful
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context, MainScreens.routeName, (route) => false);
+                              showToast("카카오 로그인 성공");
+                            } else {
+                              // failed to login
+                              tryKakaoLogout();
+                              showToast("카카오 로그인 실패");
+                            }
+                            break;
+
+                          case LOGIN_RESULT.resultFail:
+                            showToast("카카오 로그인 실패");
+                            break;
+
+                          case LOGIN_RESULT.resultCancel:
+                            break;
+                        }
+                      },
                       color: Colors.brown,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   SizedBox(
@@ -49,7 +80,7 @@ class SignInScreen extends StatelessWidget {
                       fontColor: Colors.black,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   SizedBox(
@@ -64,15 +95,15 @@ class SignInScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 40),
-            Container(
+            const SizedBox(height: 40),
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.9,
-              child: Divider(
+              child: const Divider(
                 height: 10,
                 color: Colors.black,
               ),
             ),
-            Text(
+            const Text(
               "이미 계정이 있으신가요?",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 13),
@@ -88,7 +119,7 @@ class SignInScreen extends StatelessWidget {
                 fontColor: Colors.black,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 100,
             )
           ],
@@ -97,3 +128,4 @@ class SignInScreen extends StatelessWidget {
     );
   }
 }
+
