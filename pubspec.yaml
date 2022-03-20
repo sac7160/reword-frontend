@@ -31,8 +31,8 @@ dependencies:
     sdk: flutter
 
   fluttertoast: ^8.0.9
-  kakao_flutter_sdk_user: ^1.0.0 # 카카오 로그인
-
+  kakao_flutter_sdk_user: ^1.0.0
+  sign_in_with_apple: ^3.3.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2

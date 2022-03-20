@@ -38,6 +38,13 @@ class SignInScreen extends StatelessWidget {
                     child: SignInButton(
                       text: "kakao 계정으로 시작",
                       press: () async {
+
+                        if(hasScreen(SCREEN_TYPE.kakaoLogin)) {
+                          return;
+                        }
+
+                        registerScreen(SCREEN_TYPE.kakaoLogin);
+
                         LOGIN_RESULT loginResult = await tryKakaoLogin();
                         switch(loginResult) {
                           case LOGIN_RESULT.resultOk:
@@ -52,7 +59,7 @@ class SignInScreen extends StatelessWidget {
                               showToast("카카오 로그인 성공");
                             } else {
                               // failed to login
-                              tryKakaoLogout();
+                              await tryKakaoLogout();
                               showToast("카카오 로그인 실패");
                             }
                             break;
@@ -64,6 +71,8 @@ class SignInScreen extends StatelessWidget {
                           case LOGIN_RESULT.resultCancel:
                             break;
                         }
+
+                        releaseScreen(SCREEN_TYPE.kakaoLogin);
                       },
                       color: Colors.brown,
                     ),
