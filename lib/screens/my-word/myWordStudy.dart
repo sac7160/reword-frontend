@@ -15,6 +15,13 @@ class _MyWordStudyScreenState extends State<MyWordStudyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
+          leading: Center(
+            child: GestureDetector(
+              child: Icon(Icons.arrow_back),
+              onTap: _showDialog,
+            ),
+          ),
           title: Text("단어장"),
           backgroundColor: Colors.yellow,
           elevation: 0,
@@ -35,5 +42,33 @@ class _MyWordStudyScreenState extends State<MyWordStudyScreen> {
             ),
           ),
         ));
+  }
+
+  void _showDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text("Study를 그만할까요?"),
+          content: SingleChildScrollView(child: new Text("Alert Dialog body")),
+          actions: <Widget>[
+            TextButton(
+              child: Text("그만 하기"),
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },
+            ),
+            TextButton(
+              child: Text("이어서 하기"),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
