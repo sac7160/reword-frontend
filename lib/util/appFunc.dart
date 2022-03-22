@@ -2,38 +2,47 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-// define screens which is not available to duplicate
-enum SCREEN_TYPE {
+double getScreenWidth(BuildContext context) => MediaQuery.of(context).size.width;
+double getScreenHeight(BuildContext context) => MediaQuery.of(context).size.height;
+double getPixelRatio(BuildContext context) => MediaQuery.of(context).devicePixelRatio;
+double getStatusBarSize(BuildContext context) => MediaQuery.of(context).padding.top;
+
+// define processes which is not available to duplicate
+enum PROCESS_TYPE {
   kakaoLogin,
   size
 }
 
-List arrScreen = List.filled(SCREEN_TYPE.size.index, false);
+List arrProcess = List.filled(PROCESS_TYPE.size.index, false);
 
-void registerScreen(SCREEN_TYPE eScreenType) {
-  if(hasScreen(eScreenType)) {
-    printLog("already has this screen");
+void registerProcess(PROCESS_TYPE eProcessType) {
+  if(hasScreen(eProcessType)) {
+    printLog("already has this process");
   }
 
-  arrScreen[eScreenType.index] = true;
+  arrProcess[eProcessType.index] = true;
 }
 
-void releaseScreen(SCREEN_TYPE eScreenType) {
-  if(!hasScreen(eScreenType)) {
-    printLog("already released this screen");
+void releaseProcess(PROCESS_TYPE eProcessType) {
+  if(!hasScreen(eProcessType)) {
+    printLog("already released this process");
   }
 
-  arrScreen[eScreenType.index] = false;
+  arrProcess[eProcessType.index] = false;
 }
 
-bool hasScreen(SCREEN_TYPE eScreenType) {
-  return arrScreen[eScreenType.index];
+bool hasScreen(PROCESS_TYPE eProcessType) {
+  return arrProcess[eProcessType.index];
 }
 
 void printLog(String strMsg) {
   if (kDebugMode) {
     print(strMsg);
   }
+}
+
+void printCurScreen(BuildContext context) {
+  printLog("current Screen : " + (ModalRoute.of(context)?.settings.name ?? "none"));
 }
 
 // Note: custom toast won't work on android api 30 below

@@ -39,11 +39,11 @@ class SignInScreen extends StatelessWidget {
                       text: "kakao 계정으로 시작",
                       press: () async {
 
-                        if(hasScreen(SCREEN_TYPE.kakaoLogin)) {
+                        if(hasScreen(PROCESS_TYPE.kakaoLogin)) {
                           return;
                         }
 
-                        registerScreen(SCREEN_TYPE.kakaoLogin);
+                        registerProcess(PROCESS_TYPE.kakaoLogin);
 
                         LOGIN_RESULT loginResult = await tryKakaoLogin();
                         switch(loginResult) {
@@ -72,7 +72,7 @@ class SignInScreen extends StatelessWidget {
                             break;
                         }
 
-                        releaseScreen(SCREEN_TYPE.kakaoLogin);
+                        releaseProcess(PROCESS_TYPE.kakaoLogin);
                       },
                       color: Colors.brown,
                     ),
@@ -122,7 +122,9 @@ class SignInScreen extends StatelessWidget {
               child: SignInButton(
                 text: "로그인하기",
                 press: () {
-                  Navigator.pushNamed(context, SignInEmailScreen.routeName);
+                  //Navigator.pushNamed(context, SignInEmailScreen.routeName);
+                  Navigator.pushNamedAndRemoveUntil( // TEST
+                      context, MainScreens.routeName, (route) => false);
                 },
                 color: Colors.white,
                 fontColor: Colors.black,
@@ -137,4 +139,3 @@ class SignInScreen extends StatelessWidget {
     );
   }
 }
-

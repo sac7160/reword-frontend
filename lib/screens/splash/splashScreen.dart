@@ -8,7 +8,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () {
       Navigator.pushReplacementNamed(context, SignInScreen.routeName);
     });
 
@@ -20,13 +20,13 @@ class SplashScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                child: Image(
+                child: const Image(
                   image: AssetImage("assets/images/icons8-bear-80.png"),
                   width: 150,
                   height: 150,
                 ),
               ),
-              Text(
+              const Text(
                 "Bear Voca",
                 style: TextStyle(
                   color: Colors.brown,
