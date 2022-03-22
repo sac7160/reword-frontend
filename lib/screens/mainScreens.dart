@@ -7,7 +7,7 @@ import '../../models/navItem.dart';
 import 'home/homeScreen.dart';
 
 class MainScreens extends StatefulWidget {
-  static String routeName = "/main_screens";
+  static String routeName = "/MainScreens";
 
   @override
   _MainScreensState createState() => _MainScreensState();
