@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:bearvoca/screens/quiz/quizData.dart';
+import 'package:bearvoca/screens/quiz/quizNotifier.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../values/colors.dart';
 import '../../values/dimensions.dart';
@@ -8,6 +10,7 @@ import '../../util/appFunc.dart';
 class QuizChoiceForm extends StatefulWidget {
   static const String routeName = "/quizChoiceForm";
 
+
   @override
   _QuizChoiceFormState createState() => _QuizChoiceFormState();
 }
@@ -15,64 +18,67 @@ class QuizChoiceForm extends StatefulWidget {
 class _QuizChoiceFormState extends State<QuizChoiceForm> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Padding(
-              padding: EdgeInsets.only(
-            top: margin96,
-          )),
+    return ChangeNotifierProvider<QuizNotifier>.value(
+      value: QuizNotifier(),
+      child: Scaffold(
+        body: Column(
+          children: [
+            Padding(
+                padding: EdgeInsets.only(
+              top: margin96,
+            )),
 
-          Padding(
-            padding: EdgeInsets.only(left: getScreenWidth(context) * 0.1 * 0.5),
-            child: SizedBox(
-              width: double.infinity,
-              child: Text('다음 단어의 올바른 뜻은 무엇일까요?',
-                  style: TextStyle(color: Colors.black, fontSize: wordTitleText)),
+            Padding(
+              padding: EdgeInsets.only(left: getScreenWidth(context) * 0.1 * 0.5),
+              child: SizedBox(
+                width: double.infinity,
+                child: Text('다음 단어의 올바른 뜻은 무엇일까요?',
+                    style: TextStyle(color: Colors.black, fontSize: wordTitleText)),
+              ),
             ),
-          ),
 
-          Padding(
-            padding: EdgeInsets.only(left: getScreenWidth(context) * 0.1 * 0.5),
-            child: SizedBox(
-              width: double.infinity,
-              child: Text('정답이에요!',
-                  style: TextStyle(color: Colors.pink, fontSize: wordSubTitleText)),
+            Padding(
+              padding: EdgeInsets.only(left: getScreenWidth(context) * 0.1 * 0.5),
+              child: SizedBox(
+                width: double.infinity,
+                child: Text('정답이에요!',
+                    style: TextStyle(color: Colors.pink, fontSize: wordSubTitleText)),
+              ),
             ),
-          ),
 
-          Padding(
-              padding: EdgeInsets.only(
-            top: margin32,
-          )),
+            Padding(
+                padding: EdgeInsets.only(
+              top: margin32,
+            )),
 
-          _wordItem(context),
+            _wordItem(context),
 
-          Padding(
-              padding: EdgeInsets.only(
-                top: margin64,
-              )),
+            Padding(
+                padding: EdgeInsets.only(
+                  top: margin64,
+                )),
 
-          SizedBox(
-            width: wordOkButtonWidth,
-              height: wordOkButtonHeight,
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Text(
-                  "확인",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: wordTitleText,
+            SizedBox(
+              width: wordOkButtonWidth,
+                height: wordOkButtonHeight,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "확인",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: wordTitleText,
+                    ),
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.pinkAccent,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                ),
-              )),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.pinkAccent,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                  ),
+                )),
 
-        ],
+          ],
+        ),
       ),
     );
   }
