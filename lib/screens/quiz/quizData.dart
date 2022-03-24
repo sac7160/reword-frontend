@@ -1,3 +1,5 @@
+import 'package:bearvoca/screens/quiz/quizNotifier.dart';
+
 import '../../util/AppFunc.dart';
 
 const int quizItemSize = 3;
@@ -72,10 +74,12 @@ enum QUIZ_TYPE {
 abstract class QuizData {
   String strWord = "";
   QUIZ_TYPE eQuizType = QUIZ_TYPE.none;
+  QUIZ_STATE eQuizState = QUIZ_STATE.none;
 
-  QuizData(String _strWord, QUIZ_TYPE eQuiz) {
+  QuizData(String _strWord, QUIZ_TYPE _eQuizType, {QUIZ_STATE eQuizState_ = QUIZ_STATE.none}) {
     strWord = _strWord;
-    eQuizType = eQuiz;
+    eQuizType = _eQuizType;
+    eQuizState = eQuizState_;
   }
 }
 
@@ -90,8 +94,8 @@ class QuizChoiceData extends QuizData {
 
   }
 
-  QuizChoiceData.set(String _strWord, QUIZ_TYPE _eQuiz, List<String> _arrAnswer, int _iAnswerIdx, bool _isKorAnswer)
-      : super(_strWord, _eQuiz) {
+  QuizChoiceData.set(String _strWord, QUIZ_TYPE _eQuiz, List<String> _arrAnswer, int _iAnswerIdx,
+      bool _isKorAnswer, {QUIZ_STATE eQuizState_ = QUIZ_STATE.none}) : super(_strWord, _eQuiz, eQuizState_: eQuizState_) {
     arrAnswer = _arrAnswer;
     iAnswerIdx = _iAnswerIdx;
     isKorAnswer = _isKorAnswer;
@@ -107,8 +111,9 @@ class QuizInputData extends QuizData {
 
   }
 
-  QuizInputData.set(String _strWord, QUIZ_TYPE _eQuiz, String _strAnswer)
-      : super(_strWord, _eQuiz) {
+  QuizInputData.set(String _strWord, QUIZ_TYPE _eQuiz, QUIZ_STATE _eQuizState,
+      String _strAnswer, {QUIZ_STATE eQuizState_ = QUIZ_STATE.none})
+      : super(_strWord, _eQuiz, eQuizState_: eQuizState_) {
     strAnswer = _strAnswer;
   }
 }

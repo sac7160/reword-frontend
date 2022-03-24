@@ -18,3 +18,10 @@ const double margin64 = 64;
 const double margin96 = 96;
 const double margin128 = 128;
 const double margin256 = 256;
+
+const double SHOW = 1;
+const double HIDE = 0;
+
+
+
+

@@ -1,8 +1,10 @@
 import 'package:bearvoca/screens/quiz/quizChoiceForm.dart';
 import 'package:bearvoca/screens/quiz/quizInputForm.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../util/appFunc.dart';
+import '../quiz/quizNotifier.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -21,7 +23,13 @@ class HomeScreen extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   printLog(QuizChoiceForm.routeName);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => QuizChoiceForm()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ChangeNotifierProvider<QuizNotifier>.value(
+                                  value: QuizNotifier(),
+                                  child: QuizChoiceForm())));
                 },
                 child: Text(
                   "3지선다",

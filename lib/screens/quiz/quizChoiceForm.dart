@@ -18,9 +18,7 @@ class QuizChoiceForm extends StatefulWidget {
 class _QuizChoiceFormState extends State<QuizChoiceForm> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<QuizNotifier>.value(
-      value: QuizNotifier(),
-      child: Scaffold(
+    return Scaffold(
         body: Column(
           children: [
             Padding(
@@ -28,25 +26,30 @@ class _QuizChoiceFormState extends State<QuizChoiceForm> {
               top: margin96,
             )),
 
-            Padding(
-              padding: EdgeInsets.only(left: getScreenWidth(context) * 0.1 * 0.5),
-              child: SizedBox(
-                width: double.infinity,
-                child: Text('다음 단어의 올바른 뜻은 무엇일까요?',
-                    style: TextStyle(color: Colors.black, fontSize: wordTitleText)),
+          Padding(
+                padding: EdgeInsets.only(left: getScreenWidth(context) * 0.1 * 0.5),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Text('다음 단어의 올바른 뜻은 무엇일까요?',
+                      style: TextStyle(color: Colors.black, fontSize: wordTitleText)),
+                ),
               ),
-            ),
 
-            Padding(
-              padding: EdgeInsets.only(left: getScreenWidth(context) * 0.1 * 0.5),
+          Opacity(
+            opacity: Provider.of<QuizNotifier>(context).isQuizCorrect() ? SHOW : HIDE,
+            child: Padding(
+              padding:
+                  EdgeInsets.only(left: getScreenWidth(context) * 0.1 * 0.5),
               child: SizedBox(
                 width: double.infinity,
                 child: Text('정답이에요!',
-                    style: TextStyle(color: Colors.pink, fontSize: wordSubTitleText)),
+                    style: TextStyle(
+                        color: Colors.pink, fontSize: wordSubTitleText)),
               ),
             ),
+          ),
 
-            Padding(
+          Padding(
                 padding: EdgeInsets.only(
               top: margin32,
             )),
@@ -55,32 +58,59 @@ class _QuizChoiceFormState extends State<QuizChoiceForm> {
 
             Padding(
                 padding: EdgeInsets.only(
-                  top: margin64,
+                  top: margin16,
                 )),
 
-            SizedBox(
-              width: wordOkButtonWidth,
-                height: wordOkButtonHeight,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    "확인",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: wordTitleText,
+            Opacity(
+              opacity: Provider.of<QuizNotifier>(context).isQuizNotCorrect() ? SHOW : HIDE,
+              child: SizedBox(
+              height: wordOkButtonHeight,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: const Text(
+                  "다시 생각해보세요!",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: wordTitleText,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.pinkAccent,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)),
+                ),
+              )),
+            ),
+
+            Padding(
+                padding: EdgeInsets.only(
+                  top: margin16,
+                )),
+
+              Opacity(
+                opacity: Provider.of<QuizNotifier>(context).isQuizCorrect() ? SHOW : HIDE,
+                child: SizedBox(
+                width: wordOkButtonWidth,
+                  height: wordOkButtonHeight,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text(
+                      "확인",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: wordTitleText,
+                      ),
                     ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.pinkAccent,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
-                  ),
-                )),
-
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.pinkAccent,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                    ),
+                  )),
+                ),
           ],
         ),
-      ),
-    );
+      );
   }
 }
 
@@ -88,7 +118,6 @@ Widget _wordItem(BuildContext context) {
   return Center(
     child: Container(
       width: getScreenWidth(context) * 0.9,
-      height: getScreenHeight(context) * 0.5 + margin24,
       decoration: BoxDecoration(
         color: wordBackground,
       ),
@@ -143,13 +172,9 @@ Widget _wordItem(BuildContext context) {
                       padding: EdgeInsets.only(
                     top: margin16,
                   )),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      _wordAnswers(context),
-                    ],
-                  ),
+
+                  _wordAnswers(context),
+
                 ],
               )
             ],
@@ -162,63 +187,66 @@ Widget _wordItem(BuildContext context) {
 
 Widget _wordAnswers(BuildContext context) {
   return Column(
-    crossAxisAlignment: CrossAxisAlignment.end,
     children: <Widget>[
       const Padding(padding: EdgeInsets.only(top: margin8)),
-      SizedBox(
-          height: wordItemPadding,
-          child: ElevatedButton(
-            onPressed: () {},
-            child: Text(
-              "Answer A",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: wordTextSize,
-              ),
-            ),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.blueAccent,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25)),
-            ),
-          )),
+      _Answer(context, 0),
+
       const Padding(padding: EdgeInsets.only(top: margin16)),
-      SizedBox(
-          height: wordItemPadding,
-          child: ElevatedButton(
-            onPressed: () {},
-            child: Text(
-              "Answer A",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: wordTextSize,
-              ),
-            ),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.blueAccent,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25)),
-            ),
-          )),
+      _Answer(context, 1),
+
       const Padding(padding: EdgeInsets.only(top: margin16)),
-      SizedBox(
-          height: wordItemPadding,
-          child: ElevatedButton(
-            onPressed: () {},
-            child: Text(
-              "Answer A",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: wordTextSize,
+      _Answer(context, 2),
+
+      const Padding(padding: EdgeInsets.only(top: margin16))
+    ],
+  );
+}
+
+Widget _Answer(BuildContext context, int iAnswerIdx) {
+  return Stack(
+    children: [
+
+          Opacity(
+            opacity: Provider.of<QuizNotifier>(context).isQuizCorrect() ? SHOW : HIDE,
+            child: Padding(
+              padding: EdgeInsets.only(top:(wordItemPadding - wordTextSize) / 2, left: 50),
+              child: Text(
+                "정답",
+                style: TextStyle(
+                  color: Colors.pink,
+                  fontSize: wordTitleText,
+                ),
               ),
             ),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.blueAccent,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25)),
-            ),
-          )),
-      const Padding(padding: EdgeInsets.only(top: margin16, bottom: margin16))
+          ),
+
+      Consumer<QuizNotifier>(
+        builder: (context, notifier, child) => Center(
+          child: SizedBox(
+              height: wordItemPadding,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text(
+                  notifier.getChoiceFormAnswer(iAnswerIdx),
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: wordTextSize,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        width: 3.0,
+                        color: (notifier.getAnswerIdx() == iAnswerIdx &&
+                            notifier.iSelectedIdx == iAnswerIdx) ? Colors.pink : Colors.white,
+                      ),
+                      borderRadius: BorderRadius.circular(25)),
+                ),
+              )),
+        ),
+      ),
+
     ],
   );
 }
