@@ -18,7 +18,10 @@ class _MyWordStudyScreenState extends State<MyWordStudyScreen> {
           automaticallyImplyLeading: false,
           leading: Center(
             child: GestureDetector(
-              child: Icon(Icons.arrow_back),
+              child: Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+              ),
               onTap: _showDialog,
             ),
           ),
