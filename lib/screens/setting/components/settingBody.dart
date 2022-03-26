@@ -3,12 +3,59 @@ import 'package:bearvoca/screens/setting/components/textMenu.dart';
 import 'package:bearvoca/screens/setting/components/textMenuCard.dart';
 import 'package:flutter/material.dart';
 
-class SettingBody extends StatelessWidget {
+class SettingBody extends StatefulWidget {
+  @override
+  State<SettingBody> createState() => _SettingBodyState();
+}
+
+class _SettingBodyState extends State<SettingBody> {
   @override
   Widget build(BuildContext context) {
+    bool isSwitched = false;
+
     return Column(
       children: [
         SettingHeader(),
+        SizedBox(height: 30),
+        Container(
+          width: MediaQuery.of(context).size.width * 0.9,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "알림 설정",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              Container(
+                child: Transform.scale(
+                  scale: 1.5,
+                  child: Switch(
+                    //switch 작동 이상 수정필요
+                    value: isSwitched,
+                    onChanged: (value) {
+                      setState(() {
+                        isSwitched = value;
+                        print(isSwitched);
+                      });
+                    },
+                    activeTrackColor: Colors.lightGreenAccent,
+                    activeColor: Colors.green,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 15),
+        Container(
+          width: MediaQuery.of(context).size.width * 0.9,
+          child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+            Text(
+              "베어보카 정보",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+          ]),
+        ),
         SizedBox(
           height: 330,
           child: ListView.separated(

@@ -40,4 +40,19 @@ List<TextMenu> textMenuList = [
       icon: Icons.arrow_right_alt_outlined,
       path: "/",
       press: () {}),
+  TextMenu(
+      text: "오픈소스 라이센스",
+      icon: Icons.arrow_right_alt_outlined,
+      path: "/",
+      press: () {}),
+  TextMenu(
+      text: "오픈소스 라이센스",
+      icon: Icons.arrow_right_alt_outlined,
+      path: "/",
+      press: () {}),
+  TextMenu(
+      text: "오픈소스 라이센스",
+      icon: Icons.arrow_right_alt_outlined,
+      path: "/",
+      press: () {}),
 ];
