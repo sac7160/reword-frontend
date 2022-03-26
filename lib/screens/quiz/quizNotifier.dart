@@ -2,6 +2,7 @@ import 'package:bearvoca/screens/quiz/quizData.dart';
 import 'package:flutter/material.dart';
 
 import '../../util/AppFunc.dart';
+import '../../util/vocaApp.dart';
 
 enum QUIZ_STATE {
   none,
@@ -13,43 +14,57 @@ enum QUIZ_STATE {
 // add notifier at root(or specific position) and use Consumer() in child
 class QuizNotifier extends ChangeNotifier {
 
-  int iCurQuizIdx = 0;
-  QUIZ_STATE eCurQuizState = QUIZ_STATE.none;
+  String strQuizName = "testQuiz";
   QuizDataDAO quizDao = QuizDataDAO("testAddress");
+  QUIZ_STATE eCurQuizState = QUIZ_STATE.none;
+
+  int iHoneyCnt = VocaApp.instance.iHoneyCnt;
+  int iCurQuizIdx = 0;
 
   // QUIZ_CHOICE
-  int iSelectedIdx = -1;
+  int _iSelectedIdx = -1;
 
   // QUIZ_INPUT
-  String strInput = "";
+  String _strInput = "";
+
+  int getSelectedIdx() => _iSelectedIdx;
+  double getPercent() => (iCurQuizIdx / quizDao.getQuizSize());
+
+  void updateHoneyCount() {
+    if(iHoneyCnt != VocaApp.instance.iHoneyCnt){
+      iHoneyCnt = VocaApp.instance.iHoneyCnt;
+      notifyDataSetChanged();
+    }
+  }
 
   void _setCurQuizState() {
     switch(quizDao.arrQuiz[iCurQuizIdx].eQuizType) {
       case QUIZ_TYPE.none: {
         eCurQuizState = QUIZ_STATE.none;
-        iSelectedIdx = -1;
-        strInput = "";
+        _iSelectedIdx = -1;
+        _strInput = "";
         break;
       }
 
       case QUIZ_TYPE.input: {
         QuizInputData quiz = quizDao.getQuizInput(iCurQuizIdx);
-        iSelectedIdx = -1;
+        _iSelectedIdx = -1;
         eCurQuizState = quiz.eQuizState;
-        strInput = quiz.strInput;
+        _strInput = quiz.strInput;
         break;
       }
 
       case QUIZ_TYPE.choiceKor:
       case QUIZ_TYPE.choiceEng: {
         QuizChoiceData quiz = quizDao.getQuizChoice(iCurQuizIdx);
-        iSelectedIdx = quiz.iSelectedIdx;
+        _iSelectedIdx = quiz.iSelectedIdx;
         eCurQuizState = quiz.eQuizState;
-        strInput = "";
+        _strInput = "";
         break;
       }
     }
 
+    notifyDataSetChanged();
   }
 
   String getChoiceFormAnswer(int iIdx) {
@@ -109,15 +124,30 @@ class QuizNotifier extends ChangeNotifier {
   }
 
   bool _isCorrectInput() {
-    return quizDao.getQuizInput(iCurQuizIdx).strAnswer == strInput;
+    bool isCorrect = quizDao.getQuizInput(iCurQuizIdx).strAnswer == _strInput;
+    if(isCorrect) {
+      eCurQuizState = QUIZ_STATE.correct;
+    }
+    else {
+      eCurQuizState = QUIZ_STATE.notCorrect;
+    }
+    return isCorrect;
   }
 
   bool _isCorrectChoice() {
-    if(iSelectedIdx == -1) {
+    if(_iSelectedIdx == -1) {
       return false;
     }
 
-    return quizDao.getQuizChoice(iCurQuizIdx).iAnswerIdx == iSelectedIdx;
+    bool isCorrect = quizDao.getQuizChoice(iCurQuizIdx).iAnswerIdx == _iSelectedIdx;
+    if(isCorrect) {
+      eCurQuizState = QUIZ_STATE.correct;
+    }
+    else {
+      eCurQuizState = QUIZ_STATE.notCorrect;
+    }
+
+    return isCorrect;
   }
 
   bool _isValidIdx() {
@@ -130,7 +160,7 @@ class QuizNotifier extends ChangeNotifier {
 
   // check the result of a quiz and save
   void _saveInputData(QuizInputData inputData) {
-    if(inputData.strAnswer == strInput) {
+    if(inputData.strAnswer == _strInput) {
       eCurQuizState = QUIZ_STATE.correct;
     }
     else {
@@ -138,11 +168,11 @@ class QuizNotifier extends ChangeNotifier {
     }
 
     inputData.eQuizState = eCurQuizState;
-    inputData.strInput = strInput;
+    inputData.strInput = _strInput;
   }
 
   void _saveChoiceData(QuizChoiceData choiceData) {
-    if(choiceData.iAnswerIdx == iSelectedIdx) {
+    if(choiceData.iAnswerIdx == _iSelectedIdx) {
       eCurQuizState = QUIZ_STATE.correct;
     }
     else {
@@ -150,7 +180,7 @@ class QuizNotifier extends ChangeNotifier {
     }
 
     choiceData.eQuizState = eCurQuizState;
-    choiceData.iSelectedIdx = iSelectedIdx;
+    choiceData.iSelectedIdx = _iSelectedIdx;
   }
 
   // when it's done, call this function
@@ -165,6 +195,29 @@ class QuizNotifier extends ChangeNotifier {
     else {
       _saveChoiceData(quizDao.getQuizChoice(iCurQuizIdx));
     }
+  }
+
+  void setSelectedIdx(int iIdx) {
+    if(!_isValidIdx() || iIdx < 0 || iIdx >= 3 ||
+        quizDao.arrQuiz[iCurQuizIdx].eQuizType == QUIZ_TYPE.input ||
+        quizDao.arrQuiz[iCurQuizIdx].eQuizType == QUIZ_TYPE.none) {
+      return;
+    }
+
+    _iSelectedIdx = iIdx;
+    _isCorrectChoice();
+    notifyDataSetChanged();
+  }
+
+  void setInputString(String? strInput) {
+    if(!_isValidIdx() || strInput == null || strInput.isEmpty ||
+        quizDao.arrQuiz[iCurQuizIdx].eQuizType == QUIZ_TYPE.input) {
+      return;
+    }
+
+    _strInput = strInput;
+    _isCorrectInput();
+    notifyDataSetChanged();
   }
 
   void changeQuiz(bool isNext) {

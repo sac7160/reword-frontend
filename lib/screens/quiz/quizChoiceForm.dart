@@ -1,6 +1,7 @@
 import 'package:bearvoca/screens/quiz/quizData.dart';
 import 'package:bearvoca/screens/quiz/quizNotifier.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 import '../../values/colors.dart';
@@ -10,7 +11,6 @@ import '../../util/appFunc.dart';
 class QuizChoiceForm extends StatefulWidget {
   static const String routeName = "/quizChoiceForm";
 
-
   @override
   _QuizChoiceFormState createState() => _QuizChoiceFormState();
 }
@@ -19,11 +19,69 @@ class _QuizChoiceFormState extends State<QuizChoiceForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
+      backgroundColor: Colors.white,
+          body: Column(
           children: [
+
             Padding(
                 padding: EdgeInsets.only(
-              top: margin96,
+                  top: getStatusBarSize(context) + margin16,
+                )),
+
+            Stack(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: margin16),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Icon(Icons.arrow_back_ios,
+                      color: Colors.grey, size: iconSize),
+                ),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Text(Provider.of<QuizNotifier>(context).strQuizName,
+                    style:
+                        TextStyle(fontSize: textSize24, color: Colors.black)),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(right: iconSize + margin16 + margin8),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                      Provider.of<QuizNotifier>(context).iHoneyCnt.toString(),
+                      style:
+                          TextStyle(fontSize: textSize22, color: Colors.grey)),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: margin16),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Icon(Icons.arrow_circle_down_outlined,
+                      color: Colors.grey, size: iconSize),
+                ),
+              ),
+            ],
+          ),
+          Padding(
+                padding: EdgeInsets.only(
+                  top: margin8,
+                )),
+
+            LinearPercentIndicator(
+              padding: EdgeInsets.zero,
+              width: getScreenWidth(context),
+              lineHeight: indicatorHeight,
+              animation: false,
+              percent: Provider.of<QuizNotifier>(context).getPercent(),
+              backgroundColor: Colors.grey,
+              progressColor: wordAccentColor),
+
+            Padding(
+                padding: EdgeInsets.only(
+              top: margin32,
             )),
 
           Padding(
@@ -44,7 +102,7 @@ class _QuizChoiceFormState extends State<QuizChoiceForm> {
                 width: double.infinity,
                 child: Text('정답이에요!',
                     style: TextStyle(
-                        color: Colors.pink, fontSize: wordSubTitleText)),
+                        color: wordAccentColor, fontSize: wordSubTitleText)),
               ),
             ),
           ),
@@ -75,7 +133,7 @@ class _QuizChoiceFormState extends State<QuizChoiceForm> {
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.pinkAccent,
+                  primary: wordAccentColor,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
                 ),
@@ -102,7 +160,7 @@ class _QuizChoiceFormState extends State<QuizChoiceForm> {
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.pinkAccent,
+                      primary: wordAccentColor,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
                     ),
@@ -119,7 +177,7 @@ Widget _wordItem(BuildContext context) {
     child: Container(
       width: getScreenWidth(context) * 0.9,
       decoration: BoxDecoration(
-        color: wordBackground,
+        color: wordBackgroundColor,
       ),
       child: Column(
         children: [
@@ -129,20 +187,25 @@ Widget _wordItem(BuildContext context) {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
-                    margin: EdgeInsets.all(margin16),
-                    width: hintCircleSize,
-                    height: hintCircleSize,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                    ),
+                    margin: EdgeInsets.all(margin8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text(
-                          'Hint',
-                          style: TextStyle(color: Colors.black),
+                        SizedBox(
+                          width: hintCircleSize,
+                          height: hintCircleSize,
+                          child: MaterialButton(
+                            onPressed: () {
+
+                            },
+                            color: Colors.white,
+                            child: Text('Hint',
+                            style: TextStyle(color: Colors.black, fontSize: hintTextSize),
+                            ),
+                            padding: EdgeInsets.all(margin8),
+                            shape: CircleBorder(),
+                          ),
                         ),
                       ],
                     ),
@@ -206,15 +269,18 @@ Widget _Answer(BuildContext context, int iAnswerIdx) {
   return Stack(
     children: [
 
-          Opacity(
-            opacity: Provider.of<QuizNotifier>(context).isQuizCorrect() ? SHOW : HIDE,
-            child: Padding(
-              padding: EdgeInsets.only(top:(wordItemPadding - wordTextSize) / 2, left: 50),
-              child: Text(
-                "정답",
-                style: TextStyle(
-                  color: Colors.pink,
-                  fontSize: wordTitleText,
+          Consumer<QuizNotifier>(
+            builder: (context, notifier, child) => Opacity(
+              opacity: (notifier.getAnswerIdx() == iAnswerIdx &&
+                  notifier.getSelectedIdx() == iAnswerIdx) ? SHOW : HIDE,
+              child: Padding(
+                padding: EdgeInsets.only(top:(wordItemPadding - textSize24) / 2, left: 50),
+                child: Text(
+                  "정답",
+                  style: TextStyle(
+                    color: wordAccentColor,
+                    fontSize: wordTitleText,
+                  ),
                 ),
               ),
             ),
@@ -225,12 +291,19 @@ Widget _Answer(BuildContext context, int iAnswerIdx) {
           child: SizedBox(
               height: wordItemPadding,
               child: ElevatedButton(
-                onPressed: () {},
-                child: Text(
-                  notifier.getChoiceFormAnswer(iAnswerIdx),
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: wordTextSize,
+                onPressed: () {
+                  notifier.setSelectedIdx(iAnswerIdx);
+
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: margin20, right: margin20),
+                  child: Text(
+                    notifier.getChoiceFormAnswer(iAnswerIdx),
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: textSize18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
@@ -239,7 +312,7 @@ Widget _Answer(BuildContext context, int iAnswerIdx) {
                       side: BorderSide(
                         width: 3.0,
                         color: (notifier.getAnswerIdx() == iAnswerIdx &&
-                            notifier.iSelectedIdx == iAnswerIdx) ? Colors.pink : Colors.white,
+                            notifier.getSelectedIdx() == iAnswerIdx) ? wordAccentColor : Colors.white,
                       ),
                       borderRadius: BorderRadius.circular(25)),
                 ),

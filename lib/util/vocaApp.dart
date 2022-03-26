@@ -15,17 +15,20 @@ enum LOGIN_TYPE {
   none,
 }
 
-class LoginModule {
-  static final LoginModule instance = LoginModule.init();
-  factory LoginModule() => instance;
+class VocaApp {
+  static final VocaApp instance = VocaApp.init();
+  factory VocaApp() => instance;
 
   String strUserName = "";
   String strUserEmail = "";
   bool isSnsUser = false;
   LOGIN_TYPE eLoginType = LOGIN_TYPE.none;
 
-  LoginModule.init() {
-    printLog("LoginModule was created");
+  int iRewordCnt = 0;
+  int iHoneyCnt = 0;
+
+  VocaApp.init() {
+    printLog("VocaApp was created");
   }
 }
 
@@ -103,8 +106,8 @@ Future<LOGIN_RESULT> _getUserInfoByKakao() async {
         '\n닉네임: ${user.kakaoAccount?.profile?.nickname}'
         '\n이메일: ${user.kakaoAccount?.email}');
 
-    LoginModule.instance.strUserName = user.kakaoAccount?.profile?.nickname ?? "";
-    LoginModule.instance.strUserEmail = user.kakaoAccount?.email ?? "";
+    VocaApp.instance.strUserName = user.kakaoAccount?.profile?.nickname ?? "";
+    VocaApp.instance.strUserEmail = user.kakaoAccount?.email ?? "";
     return LOGIN_RESULT.resultOk;
   } catch (error) {
     printLog('사용자 정보 요청 실패 $error');

@@ -1,6 +1,6 @@
 import 'package:bearvoca/screens/sign-in/components/signInButton.dart';
 import 'package:bearvoca/screens/sign-in/siginInEmail.dart';
-import 'package:bearvoca/util/loginModule.dart';
+import 'package:bearvoca/util/vocaApp.dart';
 import 'package:flutter/material.dart';
 
 import '../../util/appFunc.dart';
@@ -49,7 +49,7 @@ class SignInScreen extends StatelessWidget {
                         switch(loginResult) {
                           case LOGIN_RESULT.resultOk:
                             LOGIN_RESULT vocaLoginResult = await tryVocaLogin(
-                                LoginModule.instance.strUserEmail, "",
+                                VocaApp.instance.strUserEmail, "",
                                 isSnsLogin: true);
 
                             if(vocaLoginResult == LOGIN_RESULT.resultOk) {
