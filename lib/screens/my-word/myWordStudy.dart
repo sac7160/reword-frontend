@@ -32,13 +32,13 @@ class _MyWordStudyScreenState extends State<MyWordStudyScreen> {
         body: Center(
           child: Container(
             width: MediaQuery.of(context).size.width * 0.9,
-            height: 288,
+            height: 400,
             child: PageView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: words.length,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.only(left: 16),
+                  padding: const EdgeInsets.only(left: 5, right: 5),
                   child: MyWordStudyWidget(myword2: words[index]),
                 );
               },
