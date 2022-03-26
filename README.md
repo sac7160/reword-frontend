@@ -6,7 +6,6 @@ Reword FrontEnd팀 저장소입니다.
 |------|---|
 |😊 김유민|[Github](https://github.com/yumin2019)|
 |😊 박창현|[Github](https://github.com/sac7160)|
-|😊 정서연|[Github](https://github.com/seoyeon-jung)|
 
 # Skills
 <img src="https://user-images.githubusercontent.com/49779139/158051210-1c6991c5-4f2f-4c0d-a545-afdf15f9babd.png" width="30%" height="30%"/>
