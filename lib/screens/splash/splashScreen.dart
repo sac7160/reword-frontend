@@ -14,28 +14,24 @@ class SplashScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.yellow,
-      body: Container(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                child: const Image(
-                  image: AssetImage("assets/images/icons8-bear-80.png"),
-                  width: 150,
-                  height: 150,
-                ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Image(
+              image: AssetImage("assets/images/icons8-bear-80.png"),
+              width: 150,
+              height: 150,
+            ),
+            Text(
+              "Bear Voca",
+              style: TextStyle(
+                color: Colors.brown,
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
               ),
-              const Text(
-                "Bear Voca",
-                style: TextStyle(
-                  color: Colors.brown,
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
