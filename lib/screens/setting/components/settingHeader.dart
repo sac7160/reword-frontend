@@ -1,3 +1,4 @@
+import 'package:bearvoca/screens/setting/profileGallery.dart';
 import 'package:flutter/material.dart';
 
 class SettingHeader extends StatelessWidget {
@@ -13,7 +14,7 @@ class SettingHeader extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            _Profile(),
+            _Profile(context),
             SizedBox(height: 15),
             _info(),
             SizedBox(height: 15),
@@ -25,7 +26,7 @@ class SettingHeader extends StatelessWidget {
   }
 }
 
-Widget _Profile() {
+Widget _Profile(BuildContext context) {
   return Stack(
     children: [
       SizedBox(
@@ -41,15 +42,21 @@ Widget _Profile() {
       Positioned(
         bottom: 10,
         right: 10,
-        child: Container(
-          width: 30,
-          height: 30,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15), color: Colors.grey[100]),
-          child: Icon(
-            Icons.camera_alt_outlined,
-            size: 15,
-            color: Colors.black,
+        child: GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, ProfileGalleryScreen.routeName);
+          },
+          child: Container(
+            width: 30,
+            height: 30,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.grey[100]),
+            child: Icon(
+              Icons.camera_alt_outlined,
+              size: 15,
+              color: Colors.black,
+            ),
           ),
         ),
       )
