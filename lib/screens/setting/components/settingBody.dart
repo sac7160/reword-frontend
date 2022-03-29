@@ -11,7 +11,7 @@ class SettingBody extends StatefulWidget {
 class _SettingBodyState extends State<SettingBody> {
   @override
   Widget build(BuildContext context) {
-    bool isSwitched = false;
+    bool boolisSwitched = false;
 
     return Column(
       children: [
@@ -31,11 +31,11 @@ class _SettingBodyState extends State<SettingBody> {
                   scale: 1.5,
                   child: Switch(
                     //switch 작동 이상 수정필요
-                    value: isSwitched,
+                    value: boolisSwitched,
                     onChanged: (value) {
                       setState(() {
-                        isSwitched = value;
-                        print(isSwitched);
+                        boolisSwitched = value;
+                        print(boolisSwitched);
                       });
                     },
                     activeTrackColor: Colors.lightGreenAccent,
@@ -46,6 +46,11 @@ class _SettingBodyState extends State<SettingBody> {
             ],
           ),
         ),
+        SizedBox(height: 15),
+        TextMenuCard(
+            title: "베어보카 200% 활용법",
+            icon: Icons.arrow_right_alt_outlined,
+            press: () {}),
         SizedBox(height: 15),
         Container(
           width: MediaQuery.of(context).size.width * 0.9,
