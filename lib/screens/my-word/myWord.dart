@@ -1,16 +1,12 @@
 import 'package:bearvoca/screens/my-word/components/advanced.dart';
-import 'package:bearvoca/screens/my-word/components/allWord.dart';
-import 'package:bearvoca/screens/my-word/components/dayFilterButton.dart';
-import 'package:bearvoca/screens/my-word/components/difficultyButton.dart';
-import 'package:bearvoca/screens/my-word/components/favoritesCard.dart';
-import 'package:bearvoca/screens/my-word/components/middleClass.dart';
+import 'package:bearvoca/screens/my-word/components/middle.dart';
 import 'package:bearvoca/screens/my-word/components/myWordCard.dart';
-import 'package:bearvoca/screens/my-word/components/novice.dart';
+import 'package:bearvoca/screens/my-word/components/toefl.dart';
+import 'package:bearvoca/screens/my-word/components/toeic.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import 'components/toefl.dart';
-import 'components/toeic.dart';
+import 'components/ad.dart';
+import 'components/basic.dart';
 import 'myWordStudy.dart';
 
 // 피그마 초안 탭바 있는 버전. 추후 수정
@@ -121,7 +117,6 @@ class MyWordScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 25),
 
-                  // 내가 만든 단어장 탭바사용해 구현?
                   Container(
                     child: TabBar(
                       tabs: List.generate(
@@ -154,57 +149,26 @@ class MyWordScreen extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(
-                    height: 66,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: eCategories.length,
-                      itemBuilder: (context, index) {
-                        return Center(
-                          child: DifficultyButton(
-                            strTitle: eCategories[index],
-                            intPosition: index,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
                   Container(
                     width: 100,
-                    height: 100,
+                    height: 300,
                     child: TabBarView(children: [
                       Basic(),
-                      Basic(),
-                      Basic(),
-                      Basic(),
-                      Basic(),
+                      Middle(),
+                      Advanced(),
+                      Toeic(),
+                      Toefl(),
                     ]),
                   ),
-                  FavoritesCard(),
                   SizedBox(height: 30),
-                  MyWordCard(
-                    name: "레벨이 맞지 않나요?",
-                    buttonName: "재설정하기",
-                    height: 100,
-                    buttonWidth: 120,
+                  Ad(),
+                  SizedBox(
+                    height: 30,
                   )
                 ],
               ),
             ),
           ),
         ));
-  }
-}
-
-class Basic extends StatelessWidget {
-  const Basic({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text("기초"),
-      ),
-    );
   }
 }

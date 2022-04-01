@@ -23,7 +23,7 @@ class TextMenuCard extends StatelessWidget {
       onTap: press,
       child: Card(
         margin: EdgeInsets.zero,
-        color: Colors.yellow,
+        color: Colors.white,
         elevation: 0,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
@@ -37,7 +37,7 @@ class TextMenuCard extends StatelessWidget {
               Spacer(),
               SizedBox(
                 width: 26,
-                child: Icon(icon),
+                child: Icon(icon, color: Colors.grey),
               )
             ],
           ),

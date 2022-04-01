@@ -28,11 +28,11 @@ class _MainScreensState extends State<MainScreens> {
     return Scaffold(
       body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.brown,
+        backgroundColor: Colors.grey,
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.yellow,
-        unselectedItemColor: Colors.black,
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.white,
         selectedFontSize: 12.0,
         onTap: (index) {
           setState(() {

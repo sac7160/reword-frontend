@@ -1,3 +1,4 @@
+import 'package:bearvoca/screens/setting/changeInfo.dart';
 import 'package:bearvoca/screens/setting/profileGallery.dart';
 import 'package:flutter/material.dart';
 
@@ -5,7 +6,7 @@ class SettingHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.yellow,
+      color: Colors.white,
       elevation: 0,
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
@@ -18,7 +19,7 @@ class SettingHeader extends StatelessWidget {
             SizedBox(height: 15),
             _info(),
             SizedBox(height: 15),
-            _info2()
+            _info2(context)
           ],
         ),
       ),
@@ -73,11 +74,13 @@ Widget _info() {
   );
 }
 
-Widget _info2() {
+Widget _info2(BuildContext context) {
   return Container(
     width: 130,
     child: InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(context, ChangeInfo.routeName);
+      },
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(

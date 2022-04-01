@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TextMenu {
   String? text;
@@ -11,48 +12,19 @@ class TextMenu {
 
 List<TextMenu> textMenuList = [
   TextMenu(
-      text: "문의하기",
-      icon: Icons.arrow_right_alt_outlined,
-      path: "/",
-      press: () {}),
+      text: "문의하기", icon: FontAwesomeIcons.angleRight, path: "/", press: () {}),
   TextMenu(
-      text: "버전",
-      icon: Icons.arrow_right_alt_outlined,
-      path: "/",
-      press: () {}),
+      text: "버전", icon: FontAwesomeIcons.angleRight, path: "/", press: () {}),
   TextMenu(
       text: "개인정보처리방침",
-      icon: Icons.arrow_right_alt_outlined,
+      icon: FontAwesomeIcons.angleRight,
       path: "/",
       press: () {}),
   TextMenu(
-      text: "이용약관",
-      icon: Icons.arrow_right_alt_outlined,
-      path: "/",
-      press: () {}),
-  TextMenu(
-      text: "이용약관",
-      icon: Icons.arrow_right_alt_outlined,
-      path: "/",
-      press: () {}),
+      text: "이용약관", icon: FontAwesomeIcons.angleRight, path: "/", press: () {}),
   TextMenu(
       text: "오픈소스 라이센스",
-      icon: Icons.arrow_right_alt_outlined,
-      path: "/",
-      press: () {}),
-  TextMenu(
-      text: "오픈소스 라이센스",
-      icon: Icons.arrow_right_alt_outlined,
-      path: "/",
-      press: () {}),
-  TextMenu(
-      text: "오픈소스 라이센스",
-      icon: Icons.arrow_right_alt_outlined,
-      path: "/",
-      press: () {}),
-  TextMenu(
-      text: "오픈소스 라이센스",
-      icon: Icons.arrow_right_alt_outlined,
+      icon: FontAwesomeIcons.angleRight,
       path: "/",
       press: () {}),
 ];

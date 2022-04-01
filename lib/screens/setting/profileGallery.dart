@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'models/profileImage.dart';
 
@@ -25,15 +26,14 @@ class _ProfileGalleryScreenState extends State<ProfileGalleryScreen> {
             leading: Center(
               child: GestureDetector(
                 child: Icon(
-                  Icons.arrow_back,
-                  color: Colors.black,
+                  FontAwesomeIcons.angleLeft,
+                  color: Colors.grey,
                 ),
                 onTap: () {
                   Navigator.pop(context);
                 },
               ),
             ),
-            backgroundColor: Colors.yellow,
             titleSpacing: 0,
             actions: [
               TextButton(onPressed: () {}, child: Text("확인")),

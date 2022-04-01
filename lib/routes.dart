@@ -1,5 +1,7 @@
 import 'package:bearvoca/screens/mainScreens.dart';
+import 'package:bearvoca/screens/my-word/voca.dart';
 import 'package:bearvoca/screens/my-word/myWordStudy.dart';
+import 'package:bearvoca/screens/setting/changeInfo.dart';
 import 'package:bearvoca/screens/setting/profileGallery.dart';
 import 'package:bearvoca/screens/sign-in/siginInEmail.dart';
 import 'package:bearvoca/screens/sign-in/signIn.dart';
@@ -14,4 +16,6 @@ final Map<String, WidgetBuilder> route = {
   SignInEmailScreen.routeName: (context) => SignInEmailScreen(),
   MyWordStudyScreen.routeName: (context) => MyWordStudyScreen(),
   ProfileGalleryScreen.routeName: (context) => ProfileGalleryScreen(),
+  Voca.routeName: (context) => Voca(),
+  ChangeInfo.routeName: (context) => ChangeInfo(),
 };
