@@ -1,3 +1,4 @@
+import 'package:bearvoca/screens/setting/setDifficulty.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -7,7 +8,12 @@ class ChangeInfoMenu {
   String? path;
   final GestureTapCallback? press;
 
-  ChangeInfoMenu({this.text, this.icon, this.path, this.press});
+  ChangeInfoMenu({
+    this.text,
+    this.icon,
+    this.path,
+    this.press,
+  });
 }
 
 List<ChangeInfoMenu> changeInfoMenuList = [

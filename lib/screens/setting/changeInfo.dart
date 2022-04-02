@@ -1,3 +1,4 @@
+import 'package:bearvoca/screens/setting/setDifficulty.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -71,7 +72,7 @@ class ChangeInfo extends StatelessWidget {
                   color: Colors.grey,
                   height: 0,
                 ),
-                SizedBox(
+                /*SizedBox(
                   height: 165,
                   child: ListView.separated(
                     physics: ClampingScrollPhysics(),
@@ -88,6 +89,44 @@ class ChangeInfo extends StatelessWidget {
                       height: 0,
                     ),
                     itemCount: changeInfoMenuList.length,
+                  ),
+                ),*/
+                SizedBox(
+                  height: 55,
+                  child: TextMenuCard(
+                    title: "난이도 재설정하기",
+                    icon: FontAwesomeIcons.angleRight,
+                    press: () {
+                      Navigator.pushNamed(context, SetDifficulty.routeName);
+                    },
+                  ),
+                ),
+                Divider(
+                  color: Colors.grey,
+                  height: 0,
+                ),
+                SizedBox(
+                  height: 55,
+                  child: TextMenuCard(
+                    title: "닉네임 설정하기",
+                    icon: FontAwesomeIcons.angleRight,
+                    press: () {
+                      Navigator.pushNamed(context, SetDifficulty.routeName);
+                    },
+                  ),
+                ),
+                Divider(
+                  color: Colors.grey,
+                  height: 0,
+                ),
+                SizedBox(
+                  height: 55,
+                  child: TextMenuCard(
+                    title: "개인정보처리방침",
+                    icon: FontAwesomeIcons.angleRight,
+                    press: () {
+                      Navigator.pushNamed(context, SetDifficulty.routeName);
+                    },
                   ),
                 ),
                 Divider(

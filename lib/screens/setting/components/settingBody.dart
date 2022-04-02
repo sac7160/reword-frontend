@@ -17,7 +17,7 @@ class _SettingBodyState extends State<SettingBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SettingHeader(),
+        SettingHeader(intCheckedIndex: 0), //프로필 설정 수정 필요
         SizedBox(height: 30),
         Container(
           width: MediaQuery.of(context).size.width * 0.9,

@@ -3,6 +3,7 @@ import 'package:bearvoca/screens/my-word/voca.dart';
 import 'package:bearvoca/screens/my-word/myWordStudy.dart';
 import 'package:bearvoca/screens/setting/changeInfo.dart';
 import 'package:bearvoca/screens/setting/profileGallery.dart';
+import 'package:bearvoca/screens/setting/setDifficulty.dart';
 import 'package:bearvoca/screens/sign-in/siginInEmail.dart';
 import 'package:bearvoca/screens/sign-in/signIn.dart';
 import 'package:flutter/material.dart';
@@ -18,4 +19,5 @@ final Map<String, WidgetBuilder> route = {
   ProfileGalleryScreen.routeName: (context) => ProfileGalleryScreen(),
   Voca.routeName: (context) => Voca(),
   ChangeInfo.routeName: (context) => ChangeInfo(),
+  SetDifficulty.routeName: (context) => SetDifficulty(),
 };

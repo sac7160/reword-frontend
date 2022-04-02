@@ -2,7 +2,11 @@ import 'package:bearvoca/screens/setting/changeInfo.dart';
 import 'package:bearvoca/screens/setting/profileGallery.dart';
 import 'package:flutter/material.dart';
 
+import '../models/profileImage.dart';
+
 class SettingHeader extends StatelessWidget {
+  int intCheckedIndex = 1; //프로필 설정 수정 필요
+  SettingHeader({required this.intCheckedIndex});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -36,6 +40,7 @@ Widget _Profile(BuildContext context) {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(100),
           child: Container(
+            child: Image(image: AssetImage(profileImages[0].strImagePath!)),
             color: Colors.black,
           ),
         ),

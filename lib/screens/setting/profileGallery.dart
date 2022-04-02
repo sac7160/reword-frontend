@@ -1,3 +1,4 @@
+import 'package:bearvoca/values/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,6 +14,9 @@ class ProfileGalleryScreen extends StatefulWidget {
 }
 
 class _ProfileGalleryScreenState extends State<ProfileGalleryScreen> {
+  int? intCheckedInt; //프로필 설정 수정 필요
+  bool bIsChecked = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,13 +34,33 @@ class _ProfileGalleryScreenState extends State<ProfileGalleryScreen> {
                   color: Colors.grey,
                 ),
                 onTap: () {
+                  for (int i = 0; i < profileImages.length; i++) {
+                    profileImages[i].bImageChecked = false;
+                  }
                   Navigator.pop(context);
                 },
               ),
             ),
             titleSpacing: 0,
             actions: [
-              TextButton(onPressed: () {}, child: Text("확인")),
+              bIsChecked
+                  ? TextButton(
+                      onPressed: () {
+                        for (int i = 0; i < profileImages.length; i++) {
+                          profileImages[i].bImageChecked = false;
+                        }
+                        Navigator.pop(context, intCheckedInt); //프로필 설정 수정 필요
+                      },
+                      child: Text(
+                        "확인",
+                        style: TextStyle(color: wordAccentColor),
+                      ))
+                  : TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "확인",
+                        style: TextStyle(color: Colors.grey),
+                      )),
             ],
           ),
           SliverGrid(
@@ -51,27 +75,27 @@ class _ProfileGalleryScreenState extends State<ProfileGalleryScreen> {
                 return GestureDetector(
                   onTap: () {
                     setState(() {
-                      if (profileImages[index].bImageChecked)
-                        profileImages[index].bImageChecked = false;
-                      else
+                      if (!profileImages[index].bImageChecked) {
+                        for (int i = 0; i < profileImages.length; i++) {
+                          profileImages[i].bImageChecked = false;
+                        }
                         profileImages[index].bImageChecked = true;
+                        intCheckedInt = index;
+                        bIsChecked = true;
+                      }
                     });
                   },
-                  child: profileImages[index]
-                          .bImageChecked //사진 하나만 선택 어떻게 처리할지 수정필요
-                      ? Stack(children: [
-                          Container(
-                            child: Image(
-                              image: AssetImage(
-                                  profileImages[index].strImagePath!),
-                            ),
+                  child: profileImages[index].bImageChecked
+                      ? Container(
+                          child: Image(
+                            image:
+                                AssetImage(profileImages[index].strImagePath!),
                           ),
-                          Positioned(
-                            bottom: 10,
-                            right: 10,
-                            child: Text("선택됨"),
-                          )
-                        ])
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black, width: 3.0),
+                            //borderRadius: BorderRadius.circular(30),
+                          ),
+                        )
                       : Container(
                           child: Image(
                             image:
